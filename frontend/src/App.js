@@ -1,22 +1,52 @@
+import { Dropdown, Navbar, Nav } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Switch, Routes, Route, Link, useNavigate } from "react-router-dom";
+
+// Nav bar pages
+import Home from "./home";
+import About from "./about";
+import Contact from "./contact";
+import Settings from "./settings"
+
+// CSS file
 import './App.css';
 
 function App() {
+  const navigate = useNavigate();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          justin is gai
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar bg="light" expand="lg" className='navBar'>
+        <Navbar.Brand href="/">Studying Sucks</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
+          <Nav>
+            <LinkContainer to="/">
+              <Nav.Link className='nav-link'>
+                <strong>Home</strong>
+              </Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/about">
+              <Nav.Link className='nav-link'>
+                <strong>About</strong>
+              </Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/contact">
+              <Nav.Link className='nav-link'>
+                <strong>Contact</strong>
+              </Nav.Link>
+            </LinkContainer>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+
+      <Routes>
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/" element={<Home navigate={navigate}/>} />
+        <Route path="/settings" element={<Settings />} />
+      </Routes>
+    </>
   );
 }
 
