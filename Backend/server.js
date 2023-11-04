@@ -21,11 +21,10 @@ db.once('open', () => {
 
 const User = mongoose.model('User', new mongoose.Schema({ 
     _id: String,
-    id: Number,
     username: String,
+    age: Number,
     password: String,
-    name: String,
-    age: Number
+    name: String
 }));
 
 const PORT = process.env.PORT || 3000;
@@ -95,23 +94,24 @@ app.post('/login', async (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
 
-    console.log(password);//undefined
+    console.log(password);
 
     try {
         const user = await User.findOne({ username: username });
 
         // if user doesn't exist, send error
         if (!user) {
-            res.status(401).json({ status: false, message: 'Invalid Username or password'});
+            res.status(401).json({ status: false, message: 'Invalid Username'});
             return;
         }
-         
+        console.log(user);
+        const hashedpassword = await bcrypt.hash(user.password, 10);
         // Authenticate password
-        const match = await bcrypt.compare(password, user.password);
+        const match = await bcrypt.compare(password, hashedpassword );
 
         // If password is incorrect, send error
         if (!match) {
-            res.status(401).json({ status: false, message: 'Invalid Username or password'});
+            res.status(401).json({ status: false, message: 'Invalid password'});
             return;
         }
 

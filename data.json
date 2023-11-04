@@ -1,15 +1,18 @@
 [
     {
-      "name": "JohnDoe",
-      "age": 25
+      "username": "JohnDoe",
+      "age": 25,
+      "password": "123"
     },
     {
-      "name": "AliceSmith",
-      "age": 30
+      "username": "AliceSmith",
+      "age": 30,
+      "password": "123"
     },
     {
-      "name": "BobJohnson",
-      "age": 22
+      "username": "BobJohnson",
+      "age": 22,
+      "password": "123"
     }
   ]
   
