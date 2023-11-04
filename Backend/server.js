@@ -1,5 +1,11 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/dandyhacks', {
@@ -57,7 +63,7 @@ app.post('/signup', async function(req, res) {
         }
 
         // Hash the password 
-        const hashedPassword = await bcrypt.hash(password);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create new user 
         const user = new User({
@@ -82,9 +88,14 @@ app.post('/signup', async function(req, res) {
 });
 
 /* Login api for authentication of credidentials */
-app.post('/login', async function(req, res) {
+app.post('/login', async (req, res) => {
+    console.log(req.body);
+    console.log(req.body.username, req.body.password);
+    
     let username = req.body.username;
     let password = req.body.password;
+
+    console.log(password);//undefined
 
     try {
         const user = await User.findOne({ username: username });

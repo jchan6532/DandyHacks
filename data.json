@@ -1,14 +1,14 @@
 [
     {
-      "name": "John Doe",
+      "name": "JohnDoe",
       "age": 25
     },
     {
-      "name": "Alice Smith",
+      "name": "AliceSmith",
       "age": 30
     },
     {
-      "name": "Bob Johnson",
+      "name": "BobJohnson",
       "age": 22
     }
   ]

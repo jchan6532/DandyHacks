@@ -9,21 +9,18 @@ const Login = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        alert("dsfs");
+        alert(username+password);
 
-        const response = await fetch('https://localhost:3000/login', {
+        const response = await fetch('http://localhost:3000/login', {
             method: 'POST',
-            headers: {
-                'Content-type': 'application/JSON'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                username,
-                password
+                username: username,
+                password: password
             })
-        });
-
-        const data = await response.json();
-        alert(data);
+        })
+        .then(response => response.json())
+        .then(data => console.log(data));
     };
 
     return (
