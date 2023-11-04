@@ -16,6 +16,8 @@ db.once('open', () => {
 const User = mongoose.model('User', new mongoose.Schema({ 
     _id: String,
     id: Number,
+    username: String,
+    password: String,
     name: String,
     age: Number
 }));
@@ -36,8 +38,50 @@ app.get('/', async (req, res) => {
     }
 });
 
-const bcrypt = require('bcrypt');
 
+/* Signup api */
+const bcrypt = require('bcrypt');
+app.post('/signup', async function(req, res) {
+    let name = req.body.name;
+    let age = req.body.age;
+    let username = req.body.username;
+    let password = req.body.password;
+    let id = req.body.id;
+
+    try {
+
+        const existingUser = await User.findOne({ username: username });
+        if (existingUser) {
+            res.status(400).send('User already exists');
+            return;
+        }
+
+        // Hash the password 
+        const hashedPassword = await bcrypt.hash(password);
+
+        // Create new user 
+        const user = new User({
+            _id: mongoose.Types.ObjectId(),
+            id: id,
+            username: username,
+            password: hashedPassword,
+            age: age,
+            name: name
+        });
+
+        // Save user to database
+        await user.save();
+
+        // Send success message to client side
+        res.send('User created successfully');
+        
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ status: false, message: 'Server error'});
+    }
+});
+
+/* Login api for authentication of credidentials */
 app.post('/login', async function(req, res) {
     let username = req.body.username;
     let password = req.body.password;
@@ -50,7 +94,7 @@ app.post('/login', async function(req, res) {
             res.status(401).json({ status: false, message: 'Invalid Username or password'});
             return;
         }
-
+         
         // Authenticate password
         const match = await bcrypt.compare(password, user.password);
 
