@@ -1,27 +1,33 @@
 import { Button, Card } from 'react-bootstrap';
+import './App.css';
 
 const Home = ({navigate}) => {
-    const cardStyle = { 
-        width: '40rem', 
-        height: '25rem', 
-        margin: '10px',
-        backgroundColor: 'wheat', 
-        borderRadius: '30px',
-        boxShadow:'0px 20px 30px rgba(0, 0, 0, 0.2)'
-    }
+    const cards = [
+        {
+            name: "Courses",
+            description: "View your courses"
+        },
+        {
+            name: "Score",
+            description: "View your score"
+        },
+        {
+            name: "Leaderboard",
+            description: "View the leaderboard"
+        },
+        {
+            name: "Settings",
+            description: "Profile Settings"
+        }
+    ];
 
     return (
         <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
-            {[1, 2, 3, 4].map((item) => (
-                <Card style={cardStyle} key={item}>
+            {cards.map((item) => (
+                <Card className='cardStyle' key={item} onClick={() => navigate('/settings')}>
                     <Card.Body>
-                        <Card.Title>Card {item}</Card.Title>
-                        <Card.Text>
-                        This is card number {item}.
-                        </Card.Text>
-                        <Button onClick={() => navigate('/settings')}>
-                        Go to Settings
-                        </Button>
+                        <Card.Title style={{fontSize: '40px'}}>{item.name}</Card.Title>
+                        <Card.Text>{item.description}</Card.Text>
                     </Card.Body>
                 </Card>
             ))}

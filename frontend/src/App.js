@@ -7,6 +7,7 @@ import Home from "./home";
 import About from "./about";
 import Contact from "./contact";
 import Settings from "./settings"
+import Login from "./login";
 
 // CSS file
 import './App.css';
@@ -17,7 +18,7 @@ function App() {
   return (
     <>
       <Navbar bg="light" expand="lg" className='navBar'>
-        <Navbar.Brand href="/">Studying Sucks</Navbar.Brand>
+        <Navbar.Brand style={{'marginLeft': '15px', 'fontSize': '35px'}} href="/" ><strong>Studying Sucks</strong></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
           <Nav>
@@ -36,6 +37,11 @@ function App() {
                 <strong>Contact</strong>
               </Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/login">
+              <Nav.Link className='nav-link'>
+                <strong>Log In</strong>
+              </Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -45,6 +51,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/" element={<Home navigate={navigate}/>} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/login" element={<Login/>} />
       </Routes>
     </>
   );
