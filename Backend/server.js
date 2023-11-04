@@ -35,3 +35,38 @@ app.get('/', async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
+
+const bcrypt = require('bcrypt');
+
+app.post('/login', async function(req, res) {
+    let username = req.body.username;
+    let password = req.body.password;
+
+    try {
+        const user = await User.findOne({ username: username });
+
+        // if user doesn't exist, send error
+        if (!user) {
+            res.status(401).json({ status: false, message: 'Invalid Username or password'});
+            return;
+        }
+
+        // Authenticate password
+        const match = await bcrypt.compare(password, user.password);
+
+        // If password is incorrect, send error
+        if (!match) {
+            res.status(401).json({ status: false, message: 'Invalid Username or password'});
+            return;
+        }
+
+        res.json({status: true, message: 'Login successful'});
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ status: false, message: 'Server error'});
+    }
+});
+
+
+
