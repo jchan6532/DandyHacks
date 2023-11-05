@@ -8,17 +8,19 @@ import About from "./about";
 import Contact from "./contact";
 import Settings from "./settings"
 import Login from "./login";
+import Signin from './signin';
+import Courses from './courses';
 
 // CSS file
 import './App.css';
 
-function App() {
+const App = () => {
   const navigate = useNavigate();
 
   return (
     <>
       <Navbar bg="light" expand="lg" className='navBar'>
-        <Navbar.Brand style={{'marginLeft': '15px', 'fontSize': '35px'}} href="/" ><strong>Studying Sucks</strong></Navbar.Brand>
+        <Navbar.Brand style={{'marginLeft': '15px', 'fontSize': '35px'}} href="/" ><strong>study.io</strong></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
           <Nav>
@@ -51,7 +53,10 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/" element={<Home navigate={navigate}/>} />
         <Route path="/settings" element={<Settings />} />
-        <Route path="/login" element={<Login/>} />
+        <Route path="/:userName" element={<Home navigate={navigate} />} />
+        <Route path="/login" element={<Login navigate={navigate}/>} />
+        <Route path="/signin" element={<Signin navigate={navigate}/>} />
+        <Route path="/courses" element={<Courses />} />
       </Routes>
     </>
   );
