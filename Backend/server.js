@@ -27,7 +27,8 @@ const User = mongoose.model('User', new mongoose.Schema({
     username: String,
     password: String,
     name: String,
-    age: Number
+    age: Number,
+    userPastPerformance: Object
 }));
 
 const PORT = process.env.PORT || 3000;
@@ -126,7 +127,6 @@ app.post('/login', async (req, res) => {
     }
 });
 
-module.exports = { User };
 
 
 

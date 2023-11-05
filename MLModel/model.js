@@ -8,7 +8,6 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-
 async function generateQuiz(username) {
 
     mongoose.connect('mongodb://localhost:27017/dandyhacks', {
@@ -21,19 +20,22 @@ async function generateQuiz(username) {
         console.log("Connected to the database");
     });
 
-
-    const User = mongoose.model('User', new mongoose.Schema({ 
-        _id: String,
-        id: Number,
-        username: String,
-        password: String,
-        name: String,
-        age: Number,
-        userPastPerformance: Object
-    }));
-    
-
-
+    let User;
+    if (mongoose.models.User) {
+        User = mongoose.model('User');
+    }
+    else {
+        User = mongoose.model('User', new mongoose.Schema({ 
+            _id: String,
+            id: Number,
+            username: String,
+            password: String,
+            name: String,
+            age: Number,
+            userPastPerformance: Object
+        }));
+    }
+   
     const user = await User.findOne({ "username": username });
     console.log("usr found");
     if (!user) {
@@ -56,7 +58,7 @@ async function generateQuiz(username) {
             "content": "[\n  {\n    \"question\": \"question\",\n    \"multiple_choice_answers\": [\n      \"a\",\n      \"b\",\n      \"c\",\n      \"d\"\n    ],\n    \"correct_answer\": \"correct answer\"\n  }]"
           }
         ],
-        temperature: 0.56,
+        temperature: 0.1,
         max_tokens: 100,
         top_p: 1,
         frequency_penalty: 0,
