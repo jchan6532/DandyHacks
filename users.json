@@ -2,17 +2,68 @@
     {
       "username": "JohnDoe",
       "age": 25,
-      "password": "123"
+      "password": "123",
+      "userPastPerformance": {
+        "main_topic": "Math",
+        "subtopics": [
+          {
+            "name": "Addition",
+            "performance": 0.3
+          },
+          {
+            "name": "Subtraction",
+            "performance": 0.6
+          },
+          {
+            "name": "Multiplication",
+            "performance": 0.8
+          }
+        ]
+      }
     },
     {
       "username": "AliceSmith",
       "age": 30,
-      "password": "123"
+      "password": "123",
+      "userPastPerformance": {
+        "main_topic": "Math",
+        "subtopics": [
+          {
+            "name": "Addition",
+            "performance": 0.3
+          },
+          {
+            "name": "Subtraction",
+            "performance": 0.6
+          },
+          {
+            "name": "Multiplication",
+            "performance": 0.8
+          }
+        ]
+      }
     },
     {
       "username": "BobJohnson",
       "age": 22,
-      "password": "123"
+      "password": "123",
+      "userPastPerformance": {
+        "main_topic": "Math",
+        "subtopics": [
+          {
+            "name": "Addition",
+            "performance": 0.3
+          },
+          {
+            "name": "Subtraction",
+            "performance": 0.6
+          },
+          {
+            "name": "Multiplication",
+            "performance": 0.8
+          }
+        ]
+      }
     }
   ]
   

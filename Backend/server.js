@@ -28,19 +28,40 @@ const User = mongoose.model('User', new mongoose.Schema({
     username: String,
     age: Number,
     password: String,
+    userPastPerformance: Object
 }));
 
 // Courses schema
 const Course = mongoose.model('Course', new mongoose.Schema({
-    coursename: {
+    username: {
       type: String,
       required: true
     },
-    topics: {
-      type: [String],
+    age: {
+      type: Number,
       required: true
+    },
+    password: {
+      type: String,
+      required: true
+    },
+    userPastPerformance: {
+      main_topic: {
+        type: String,
+        required: true
+      },
+      subtopics: [{
+        name: {
+          type: String,
+          required: true
+        },
+        performance: {
+          type: Number,
+          required: true
+        }
+      }]
     }
-}));
+  }));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
