@@ -40,8 +40,6 @@ app.get('/', async (req, res) => {
     try {
         const user = await User.findOne({ name: 'justin chan' });
         console.log(user);
-        const quiz = await generateQuiz(user.username);
-        res.send(quiz);
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
@@ -124,6 +122,17 @@ app.post('/login', async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ status: false, message: 'Server error'});
+    }
+});
+
+app.get('/personalized-quiz/:username', async (req, res) => {
+    try {
+        const user = await User.findOne({username : username});
+        const quiz = await generateQuiz(user.username);
+        res.send(quiz);
+    }
+    catch (err) {
+        res.status(502).send('Creation of personalized quiz failed.');
     }
 });
 
