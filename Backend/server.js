@@ -125,6 +125,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
+/* AI powered personalized quiz API */
 app.get('/personalized-quiz/:username', async (req, res) => {
     try {
         const user = await User.findOne({username : username});
@@ -135,6 +136,8 @@ app.get('/personalized-quiz/:username', async (req, res) => {
         res.status(502).send('Creation of personalized quiz failed.');
     }
 });
+
+
 
 
 
