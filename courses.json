@@ -1,0 +1,36 @@
+[
+    {
+        "coursename": "math",
+        "topics": [
+            "addition",
+            "subtraction",
+            "division",
+            "multiplication"
+        ]
+    },
+    {
+        "coursename": "physics",
+        "topics": [
+            "inertia",
+            "relativity"
+        ]
+    },
+    {
+        "coursename": "computer science",
+        "topics": [
+            "full-stack",
+            "machine learning",
+            "large scale system programming",
+            "data science"
+        ]
+    },
+    {
+        "coursename": "league of legends",
+        "topics": [
+            "wave management",
+            "mechanics",
+            "macro decision making",
+            "touching grass"
+        ]
+    }
+]
