@@ -2,8 +2,10 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const generateQuiz = require('../MLModel/model.js');
+require('dotenv').config();
 
-app.use(express.json())
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
@@ -37,7 +39,8 @@ app.get('/', async (req, res) => {
     try {
         const user = await User.findOne({ name: 'justin chan' });
         console.log(user);
-        res.json(user);
+        const quiz = await generateQuiz(user.username);
+        res.send(quiz);
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
@@ -124,4 +127,6 @@ app.post('/login', async (req, res) => {
 });
 
 module.exports = { User };
+
+
 
