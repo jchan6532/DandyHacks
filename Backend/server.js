@@ -130,7 +130,13 @@ app.get('/personalized-quiz/:username', async (req, res) => {
     try {
         const user = await User.findOne({username : username});
         const quiz = await generateQuiz(user.username);
-        res.send(quiz);
+
+        // Remove "\n" characters and "+" signs from the JSON
+        const cleanedQuizJson = quiz
+        .replace(/\\n/g, '')  // Remove "\n" characters
+        .replace(/\s*\+\s*/g, ''); // Remove "+" signs
+        console.log(cleanedQuizJson);
+        quiz = JSON.parse(cleanedQuizJson);
     }
     catch (err) {
         res.status(502).send('Creation of personalized quiz failed.');
